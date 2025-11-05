@@ -1,0 +1,142 @@
+/* Stili specifici per il Complex Visualizer */
+
+main {
+    max-width: 1000px; /* Più largo per i canvas */
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center; /* Centra i controlli */
+}
+
+.visualizer-container {
+    display: flex;
+    flex-wrap: wrap; /* Va a capo su schermi piccoli */
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+#zPlaneDiv, #wPlaneDiv {
+    flex: 1 1 400px; /* Permette ai canvas di ridimensionarsi */
+    min-width: 300px; /* Larghezza minima prima di andare a capo */
+}
+
+#zPlaneDiv h2, #wPlaneDiv h2 {
+    font-size: 1.8em;
+    color: var(--text-color);
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#zCanvas, #wCanvas {
+    border: 1px solid var(--border-color);
+    background-color: #181818; /* MODIFICATO: Sfondo scuro per i canvas */
+    width: 100%; /* Responsive */
+    height: auto; /* Mantiene aspect ratio */
+    max-width: 450px; /* Limite massimo */
+    box-sizing: border-box;
+}
+
+/* Controlli */
+.controls-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background-color: #111; /* Sfondo scuro per i controlli */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1.1em;
+}
+
+.controls-container input[type="text"],
+.controls-container input.jscolor {
+    background-color: #222;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px;
+    border-radius: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1em;
+}
+
+/* Stile per i bottoni (coerente con il sito) */
+.controls-container button,
+.settings-content button {
+    background-color: #2a2a2d;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 15px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.controls-container button:hover,
+.settings-content button:hover {
+    background-color: #333;
+    border-color: var(--highlight-color);
+}
+
+/* Modale Impostazioni (Stile apcaruso) */
+.settings {
+    display: none; 
+    position: fixed; 
+    z-index: 1001; /* Sopra l'header */
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.7); /* Sfondo scuro trasparente */
+}
+
+.settings-content {
+    background-color: #111; /* Sfondo modale scuro */
+    color: var(--text-color);
+    margin: 15% auto; 
+    padding: 25px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 250px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+    line-height: 2.0; /* Più spazio */
+}
+
+.settings-content input[type="text"] {
+    background-color: #222;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 5px;
+    border-radius: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9em;
+    width: 60px; /* Larghezza fissa per input */
+    margin-left: 10px;
+}
+
+.settings-content button {
+    margin-top: 15px;
+    width: 100%;
+}
+
+/* Link Home Nav (già in global.css, ma per sicurezza) */
+.home-nav {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+.home-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.1em;
+    font-style: italic;
+}
+.home-nav a:hover {
+    text-decoration: underline;
+}

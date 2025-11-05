@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-R">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funzioni Complesse</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&display.swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../global.css">
+    
+    <link rel="stylesheet" href="complex_visualizer_style.css">
+
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="js/complex.min.js"></script>
+    <script src="js/jscolor.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="home-nav">
+            <a href="../">&larr; Home</a>
+        </nav>
+        
+        <h1>Visualizzatore di Funzioni Complesse</h1>
+        <p style="font-style: italic; color: #b0b0b0;">Disegna sul piano Z e osserva la mappatura sul piano W.</p>
+    </header>
+
+    <main>
+        <div class="visualizer-container">
+            <div id="zPlaneDiv"><h2>Piano Z (Dominio)</h2></div>    
+            <div id="wPlaneDiv"><h2>Piano W (Codominio)</h2></div>
+        </div>
+
+        <div class="controls-container">
+            f(z) = <input type=text id="mapping" size="10" value="z">
+            <button onclick="mapUpdate()">Aggiorna Mappa</button>
+            <button onclick="clearCanvas()">Pulisci</button>
+            
+            Colore: <input class="jscolor" onchange="updateColor(this.jscolor)" value="A0C0FF" size="4">
+            
+            <button id="settingsButton">Impostazioni</button>
+        </div>
+
+        <div style="max-width: 800px; margin: 40px auto; padding: 20px; background-color: #111; border: 1px solid #333; border-radius: 8px; text-align: left; line-height: 1.7;">
+            <h2 style="font-size: 1.8em; color: #e0e0e0; font-weight: 400; margin-top: 0; margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 15px;">
+                Spiegazione
+            </h2>
+            
+            <p style="font-size: 1.1em; margin-bottom: 20px;">
+                Questo strumento visualizza una mappa $f: D \to W$, dove $D, W \subset \mathbb{C}$ sono rettangoli definiti dall'utente. L'utente traccia un cammino $\gamma(t)$ nel dominio $D$, che viene catturato dal canvas come un insieme discreto di punti (coordinate pixel) $\{p_k\}_{k=1}^N$.
+            </p>
+        </div>
+        <div id="settings" class="settings">
+            <div class="settings-content">
+                <b>Impostazioni Intervallo:</b>
+                <br>
+                Piano Z:<br>
+                X Max:<input type="text" id="ZMAXX" value="2" size="4"><br>
+                X Min:<input type="text" id="ZMINX" value="-2" size="4"><br>
+                Y Max:<input type="text" id="ZMAXY" value="2" size="4"><br>
+                Y Min:<input type="text" id="ZMINY" value="-2" size="4"><br>
+                Piano W:<br>
+                X Max:<input type="text" id="WMAXX" value="2" size="4"><br>
+                X Min:<input type="text" id="WMINX" value="-2" size="4"><br>
+                Y Max:<input type="text" id="WMAXY" value="2" size="4"><br>
+                Y Min:<input type="text" id="WMINY" value="-2" size="4"><br>
+                <button onclick="updateRange()">Aggiorna Intervallo</button><br>
+                <button onclick="resetRange()">Reimposta Intervallo</button><br>
+                <b>Impostazioni Taglio di Ramo:</b><br>
+                Soglia Taglio Ramo:<input type="text" id="bct" value="10" size="4"><br>
+                <button onclick="updateBCT()">Aggiorna Soglia</button><br>
+                <button onclick="resetBCT()">Reimposta Soglia</button><br>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>A.P.C.</p>
+    </footer>
+
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/box.js"></script>
+    
+    </body>
+</html>
