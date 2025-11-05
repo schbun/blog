@@ -1,0 +1,38 @@
+/* Link Home Nav (Aggiunto per coerenza) */
+.home-nav {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+.home-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.1em;
+    font-style: italic;
+}
+.home-nav a:hover {
+    text-decoration: underline;
+}
+
+/* Stili specifici per la simulazione Dots (adattati per apcaruso.com) */
+main {
+    /* Sovrascrive global.css per centrare il canvas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Rimuove padding/margin specifici della home o degli articoli */
+    max-width: none; 
+    margin: 0;
+    padding: 20px; /* Aggiunge spazio per non toccare header/footer */
+    box-sizing: border-box; 
+
+    /* Impostazioni dallo style.css originale di dots (che erano su 'body') */
+    background-color: #111;
+    overflow: hidden;
+    
+    /* flex-grow: 1; è già in global.css e fa sì che main riempia lo spazio */
+}
+
+/* Stile per il canvas creato da p5.js (originariamente 'main') */
+/* p5.js appende il canvas dentro 'main', quindi targettizziamo il canvas */
