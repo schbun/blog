@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un rischio per il nostro futuro</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&display.swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300&display.swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../../global.css"> 
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="home-nav">
+            <a href="../../">&larr; Home</a> 
+        </nav>
+        <h1>Un rischio per il nostro futuro</h1>
+    </header>
+
+    <main>
+        <p style="text-align: justify; color: #b0b0b0; font-style: italic; margin-bottom: 30px; border-bottom: 1px solid var(--border-color); padding-bottom: 30px;">
+            Ho letto questo paper molto interessante <a href="https://arxiv.org/pdf/2305.17493" target="_blank" style="color: var(--highlight-color);">THE CURSE OF RECURSION: TRAINING ON GENERATED DATA MAKES MODELS FORGET</a>. Dimostra come la qualita degli output dei nostri amati modelli di linguaggio (GPT, Gemini ecc...) è destinata a degenerare malissimo. In breve per dare un po' di contesto: Al giorno d'oggi gli LLM vengono trainati con una buona percentuale di dati creati da esseri umani. Immaginate chatGPT come se fosse l'intero internet compresso in un file zip. I dati quando vengono interpolati da un modello di linguaggio perdono sempre dettagli (la coda), quello che vedete ai lati di una distribuzione normale. Ora immaginate i nostri amati crawler (i software di openAI, Google ecc... che scannerizzano l'intero internet) che oltre a far aumentare i prezzi di hosting, si ritrovano a scannerizzare blog scritti da AI, e immaginate che questi blog diventano la maggioranza. I dettagli, verranno persi. Gli LLM che oggi fanno una media dell'internet, in futuro faranno una media della media.  Qua sotto potete trovare degli applet che non sono applet sui punti che reputo più importanti.
+        </p>
+
+        <section id="sim-gmm">
+            <h2>La nuvola che si restringe</h2>
+            <p>
+                Questa simulazione rappresenta i dati di addestramento come tre distinti gruppi di punti (grigio). Il modello (blu) cerca di approssimare questi dati. A ogni generazione, il modello viene addestrato sui dati della generazione precedente.
+                Se il modello si addestra solo sui propri output (0% Dati Reali), collasserà rapidamente verso una singola media, dimenticando i "gruppi" originali. Usa lo slider per reintrodurre dati reali e preservare la diversità.
+            </p>
+            <p style="font-size: 1.0em; font-style: italic; color: var(--accent-color-dim); text-align: justify;">
+                Questa visualizzazione è un'astrazione del concetto discusso nella <strong>Sezione 5.1</strong> e illustrato nella <strong>Figura 7</strong>, dove Gaussian Mixture Models (GMM) collassano perdendo le modalità (i cluster) originali.
+            </p>
+            <div class="ui-container" id="ui-gmm">
+                </div>
+            <div id="canvas-gmm" class="p5-canvas-container"></div>
+        </section>
+
+        <hr>
+
+        <section id="sim-histo">
+            <h2>L'Istogramma che scompare</h2>
+            <p>
+                Questo istogramma rappresenta la distribuzione di probabilità dei dati reali (es. la frequenza delle parole in un testo). Le barre basse rappresentano eventi rari (le code). Ad ogni generazione, campioniamo M volte dalla distribuzione attuale per creare quella nuova.
+                Gli eventi rari hanno una bassa probabilità di essere campionati. Se non vengono campionati, la loro probabilità scende a zero e scompaiono per sempre, portando il modello a collassare sui picchi più comuni.
+            </p>
+            <p style="font-size: 1.0em; font-style: italic; color: var(--accent-color-dim); text-align: justify;">
+                Questo concetto è descritto nella <strong>Sezione 4.1 (Discrete distributions)</strong> e visualizzato nella <strong>Figura 3</strong>. Il paper spiega come gli eventi con bassa probabilità (le code della distribuzione) siano i primi a scomparire a causa del campionamento finito.
+            </p>
+            <div class="ui-container" id="ui-histo">
+                </div>
+            <div id="canvas-histo" class="p5-canvas-container"></div>
+        </section>
+
+        <hr>
+
+        <section id="sim-text">
+            <h2>La Frase in loop</h2>
+            <p>
+                Questa simulazione mostra un vocabolario dove la dimensione e la luminosità di ogni parola rappresentano la sua probabilità. Quando generi una frase, il modello sceglie le parole in base alla loro probabilità.
+                Subito dopo, le probabilità delle parole usate vengono aumentate (feedback loop). Clicca ripetutamente "Genera Frase" per osservare come il modello collassi rapidamente su poche parole, creando frasi ripetitive.
+            </p>
+            <p style="font-size: 1.0em; font-style: italic; color: var(--accent-color-dim); text-align: justify;">
+                Questa è una metafora di quanto discusso nella <strong>Sezione 5.2 (Language Models)</strong>. Come mostrato negli esempi di output a pagina 3 (es. "Gen 9") e menzionato nel testo, i modelli collassati tendono a produrre <strong>frasi ripetitive</strong>, bloccandosi su un sottoinsieme limitato del vocabolario.
+            </p>
+            <div class="ui-container" id="ui-text">
+                </div>
+            <div id="canvas-text" class="p5-canvas-container"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>A.P.C.</p>
+    </footer>
+
+    <script src="sketch_gmm.js"></script>
+    <script src="sketch_histo.js"></script>
+    <script src="sketch_text.js"></script>
+</body>
+</html>
